@@ -3,12 +3,12 @@
     <persistence-unit name="litlink-jpa" transaction-type="JTA">
         <jta-data-source>jdbc/LitLinkDS</jta-data-source>
 
-        <class>si.fri.prpo.nakupovanje.entitete.NakupovalniSeznam</class>
+        <class>si.fri.prpo.litlink.entitete.Uporabnik</class>
 	<!-- <class>si.fri.prpo.nakupovanje.entitete.Artikel</class>
         <class>si.fri.prpo.nakupovanje.entitete.Uporabnik</class>
         <class>si.fri.prpo.nakupovanje.entitete.Oznaka</class>
 
-		<class>si.fri.prpo.nakupovanje.pretvorniki.InstantPretvornik</class> --!>
+		<class>si.fri.prpo.nakupovanje.pretvorniki.InstantPretvornik</class> -->
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

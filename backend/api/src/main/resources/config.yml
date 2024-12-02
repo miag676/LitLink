@@ -13,5 +13,5 @@ kumuluzee:
     checks:
       data-source-health-check:
         type: liveness
-        jndi-name: jdbc/LitLinksDS
+        jndi-name: jdbc/LitLinkDS
   
