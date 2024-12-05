@@ -11,17 +11,18 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>api</module>
-        <module>storitve</module>
-        <module>entitete</module>
+        <module>users</module>
+        <module>books</module>
+	<!-- <module>entitete</module> -->
+        <module>shared</module>
     </modules>
 
     <name>LitLink</name>
     <description>Spletna platforma za upravljanje s knjigami.</description>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <kumuluzee.version>4.1.0</kumuluzee.version>
