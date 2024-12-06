@@ -14,7 +14,7 @@ public class RegisterDto {
     public RegisterDto() {
     }
 
-    public RegisterDto(Integer id, String name, String lastName, String userName, String email, String password) {
+    public RegisterDto(String name, String lastName, String userName, String email, String password) {
         this.name = name;
         this.lastName = lastName;
         this.userName = userName;
