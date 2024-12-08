@@ -8,7 +8,8 @@ import javax.persistence.*;
         {
                 @NamedQuery(name = "users.getAll", query = "SELECT u FROM User u"),
                 @NamedQuery(name = "users.getById",
-                        query = "SELECT u FROM User u WHERE u.id = :id")
+                        query = "SELECT u FROM User u WHERE u.id = :id"),
+                @NamedQuery(name = "users.login", query = "SELECT u FROM User u WHERE u.userName = :userName AND u.password = :password")
         })
 public class User {
 
@@ -69,7 +70,7 @@ public class User {
     }
 
     public void setUserName(String uporabniskoIme) {
-        this.userName = uporabniskoIme;
+        this.userName = uporabniskoIme; 
     }
 
     public String getEmail() {

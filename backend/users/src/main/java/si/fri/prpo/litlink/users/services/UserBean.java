@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -103,4 +104,19 @@ public class UserBean {
         return false;
 
     }
+
+    public User login(String userName, String password) {
+        try {
+            User user = em.createNamedQuery("users.login", User.class)
+                          .setParameter("userName", userName)
+                          .setParameter("password", password)
+                          .getSingleResult();
+            log.info("User logged in successfully: " + userName);
+            return user;
+        } catch (NoResultException e) {
+            log.warning("Login failed for user: " + userName);
+            return null;
+        }
+    }
+
 }
