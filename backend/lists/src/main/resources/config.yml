@@ -5,7 +5,7 @@ kumuluzee:
     name: dev
   server:
     http:
-      port: 9090
+      port: 9092
   datasources:
     - jndi-name: jdbc/LitLinkDS
       connection-url: jdbc:postgresql://localhost:5432/litlink

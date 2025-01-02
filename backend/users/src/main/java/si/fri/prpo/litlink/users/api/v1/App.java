@@ -12,10 +12,6 @@ import org.eclipse.microprofile.openapi.annotations.info.License;
     info = @Info(
         title = "LitLink Users API",
         version = "1.0.0",
-        contact = @Contact(
-            name = "Support Team",
-            email = "support@litlink.com"
-        ),
         license = @License(
             name = "Apache 2.0",
             url = "https://www.apache.org/licenses/LICENSE-2.0.html"

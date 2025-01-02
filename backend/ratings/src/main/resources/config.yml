@@ -5,13 +5,13 @@ kumuluzee:
     name: dev
   server:
     http:
-      port: 9090
+      port: 9091
   datasources:
-    - jndi-name: jdbc/LitLinkDS
+    - jndi-name: jdbc/LitLinkDS 
       connection-url: jdbc:postgresql://localhost:5432/litlink
       username: postgres
       password: postgres
-      max-pool-size: 20
+      max-pool-size: 20 
   health:
     checks:
       data-source-health-check:

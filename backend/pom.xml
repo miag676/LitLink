@@ -13,7 +13,8 @@
     <modules>
         <module>users</module>
         <module>books</module>
-	<!-- <module>entitete</module> -->
+        <module>ratings</module>
+        <module>lists</module>
         <module>shared</module>
     </modules>
 
