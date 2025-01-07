@@ -6,7 +6,7 @@
 
     <groupId>si.fri.prpo.litlink</groupId>
     <artifactId>LitLink</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <packaging>pom</packaging>
 
@@ -100,21 +100,6 @@
                 <version>${postgresql.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>si.fri.prpo.litlink</groupId>
-                <artifactId>api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>si.fri.prpo.litlink</groupId>
-                <artifactId>storitve</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>si.fri.prpo.litlink</groupId>
-                <artifactId>entitete</artifactId>
-                <version>${project.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
