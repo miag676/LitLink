@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.stream.Collectors;
+import java.util.List;
 
 @ApplicationScoped
 public class ListsBean {
@@ -19,7 +20,7 @@ public class ListsBean {
         return em.createQuery("SELECT l FROM UserList l", UserList.class)
                  .getResultList()
                  .stream()
-                 .map(l -> new ListDto(l.getUserId(), l.getName(), l.getBookIds()))
+                 .map(l -> new ListDto(l.getId(), l.getUserId(), l.getName(), l.getBookIds()))
                  .collect(Collectors.toList());
     }
 
@@ -56,4 +57,26 @@ public class ListsBean {
             em.remove(list);
         }
     }
+
+    public List<ListDto> getUserLists(Integer userId) {
+    return em.createQuery("SELECT l FROM UserList l WHERE l.userId = :userId", UserList.class)
+             .setParameter("userId", userId)
+             .getResultList()
+             .stream()
+             .map(l -> new ListDto(l.getId(), l.getUserId(), l.getName(), l.getBookIds()))
+             .collect(Collectors.toList());
+    }
+
+    public List<Integer> getBooksByUser(Integer userId) {
+    List<UserList> userLists = em.createQuery("SELECT l FROM UserList l WHERE l.userId = :userId", UserList.class)
+                                 .setParameter("userId", userId)
+                                 .getResultList();
+
+        return userLists.stream()
+                        .flatMap(list -> list.getBookIds().stream()) // Flatten all book IDs across lists
+                        .distinct() // Remove duplicate book IDs
+                        .collect(Collectors.toList());
+    }
+
+
 }

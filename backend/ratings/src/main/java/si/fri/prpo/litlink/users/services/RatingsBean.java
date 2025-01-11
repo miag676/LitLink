@@ -38,4 +38,24 @@ public class RatingsBean {
             em.remove(rating);
         }
     }
+
+    public List<Object[]> getGlobalAverageRatings() {
+        return em.createQuery(
+                "SELECT r.bookId, AVG(r.rating) " +
+                "FROM Rating r " +
+                "GROUP BY r.bookId", Object[].class)
+                .getResultList();
+    }
+
+    public List<RatingDto> getRatingsByUser(Integer userId) {
+    return em.createQuery("SELECT r FROM Rating r WHERE r.userId = :userId", Rating.class)
+             .setParameter("userId", userId)
+             .getResultList()
+             .stream()
+             .map(r -> new RatingDto(r.getUserId(), r.getBookId(), r.getRating()))
+             .collect(Collectors.toList());
+    }
+
+    
+
 }

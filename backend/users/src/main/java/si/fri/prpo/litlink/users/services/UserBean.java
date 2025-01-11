@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 import com.kumuluz.ee.rest.beans.QueryParameters;
 //import com.kumuluz.ee.rest.utils.JPAUtils;
@@ -44,6 +45,11 @@ public class UserBean {
         return l;
 
     }
+
+    public List<Integer> getAllUserIds() {
+        return em.createQuery("SELECT u.id FROM User u", Integer.class).getResultList();
+    }
+
 
     public List<User> getAllUsers(QueryParameters query) {
         
@@ -118,5 +124,15 @@ public class UserBean {
             return null;
         }
     }
+
+    public List<UserDto> fetchAllUsers() {
+        List<User> users = getAllUsers(); // Existing method to get all users
+        List<UserDto> userDtos = new ArrayList<>();
+        for (User user : users) {
+            userDtos.add(new UserDto(user.getId(), user.getName(), user.getLastName(), user.getUserName(), user.getEmail()));
+        }
+        return userDtos;
+    }
+
 
 }
