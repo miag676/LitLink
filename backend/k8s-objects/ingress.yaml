@@ -1,0 +1,35 @@
+#! Not currently used. It should be used, however had problems, so for now all services are loadbalancers on their own.
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: litlink-ingress
+  namespace: litlink
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /v1/users
+            pathType: Prefix
+            backend:
+              service:
+                name: users-service
+                port:
+                  number: 8080
+          # You can add more paths here for other services (e.g., /books)
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-nginx
+  namespace: litlink
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: ingress-nginx

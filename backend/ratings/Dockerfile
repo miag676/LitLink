@@ -5,10 +5,10 @@ FROM openjdk:17-jdk
 WORKDIR /app
 
 # Copy the module's code into the container
-COPY ./target/users-1.0.0.jar users-1.0.0.jar
+COPY ./target/ratings-1.0.0.jar ratings-1.0.0.jar
 
 # Expose necessary ports (e.g., 8080)
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "users-1.0.0.jar"]
+CMD ["java", "-jar", "ratings-1.0.0.jar"]

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ratings
+  namespace: litlink
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ratings
+  template:
+    metadata:
+      labels:
+        app: ratings
+    spec:
+      containers:
+      - name: ratings-container
+        image: ghcr.io/spehic/ratings:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ratings-service
+  namespace: litlink
+spec:
+  type: LoadBalancer
+  selector:
+    app: ratings
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lists
+  namespace: litlink
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lists
+  template:
+    metadata:
+      labels:
+        app: lists
+    spec:
+      containers:
+      - name: lists-container
+        image: ghcr.io/spehic/lists:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lists-service
+  namespace: litlink
+spec:
+  type: LoadBalancer
+  selector:
+    app: lists
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
