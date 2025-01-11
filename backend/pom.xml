@@ -16,6 +16,8 @@
         <module>ratings</module>
         <module>lists</module>
         <module>shared</module>
+        <module>recommendations</module>
+        <module>notifications</module>
     </modules>
 
     <name>LitLink</name>

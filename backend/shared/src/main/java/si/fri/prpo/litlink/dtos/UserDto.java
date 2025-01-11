@@ -1,6 +1,7 @@
 package si.fri.prpo.litlink.dtos;
 
 public class UserDto {
+    private Integer id; 
     private String name;
 
     private String lastName;
@@ -13,10 +14,15 @@ public class UserDto {
     }
 
     public UserDto(Integer id, String name, String lastName, String userName, String email) {
+        this.id = id; 
         this.name = name;
         this.lastName = lastName;
         this.userName = userName;
         this.email = email;
+    }
+
+    public Integer getId() { // Add getter for id
+        return id;
     }
     
     public String getName() {

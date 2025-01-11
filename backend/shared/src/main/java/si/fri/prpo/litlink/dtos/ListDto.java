@@ -3,16 +3,22 @@ package si.fri.prpo.litlink.dtos;
 import java.util.List;
 
 public class ListDto {
+    private Integer id; 
     private Integer userId;
     private String name;
     private List<Integer> bookIds;
 
     public ListDto() {}
 
-    public ListDto(Integer userId, String name, List<Integer> bookIds) {
+    public ListDto(Integer id, Integer userId, String name, List<Integer> bookIds) {
+        this.id = id;
         this.userId = userId;
         this.name = name;
         this.bookIds = bookIds;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public Integer getUserId() {

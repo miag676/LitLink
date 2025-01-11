@@ -3,7 +3,7 @@
     <persistence-unit name="litlink-jpa" transaction-type="JTA">
         <jta-data-source>jdbc/LitLinkDS</jta-data-source>
 
-        <class>si.fri.prpo.litlink.lists.entities.UserList</class>
+        <class>si.fri.prpo.litlink.notifications.entities.Notification</class>
 	<!-- <class>si.fri.prpo.nakupovanje.entitete.Artikel</class>
         <class>si.fri.prpo.nakupovanje.entitete.Uporabnik</class>
         <class>si.fri.prpo.nakupovanje.entitete.Oznaka</class>
