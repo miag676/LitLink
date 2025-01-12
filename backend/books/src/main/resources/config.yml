@@ -9,6 +9,7 @@ kumuluzee:
     username: postgres
     password: postgres
     max-pool-size: 20
-  openapi:
+  openapi-mp:
+    enabled: true
     servlet:
-      mapping: v1/books
+      mapping: /v1/books/openapi
