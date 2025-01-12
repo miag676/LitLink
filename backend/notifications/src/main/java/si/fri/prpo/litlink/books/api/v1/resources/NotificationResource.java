@@ -87,4 +87,20 @@ public class NotificationResource {
         notificationBean.clearNotificationsByUserId(userId);
         return Response.ok("Notifications cleared for user ID: " + userId).build();
     }
+
+    @GET
+    @Path("readiness")
+    public Response Ready() {
+        boolean dbResponse = notificationBean.checkDBConn();
+        if (dbResponse)
+            return Response.ok().build();
+        else
+            return Response.serverError().header("Error message", "DB is not responding").build();
+    }
+
+    @GET
+    @Path("healthz")
+    public Response Alive() {
+        return Response.ok().build();
+    }
 }

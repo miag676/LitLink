@@ -138,7 +138,20 @@ public class RatingsResource {
         return Response.ok(userRatings).build();
     }
 
+    @GET
+    @Path("readiness")
+    public Response Ready() {
+        boolean dbResponse = ratingsBean.checkDBConn();
+        if (dbResponse)
+            return Response.ok().build();
+        else
+            return Response.serverError().header("Error message", "DB is not responding").build();
+    }
 
-
+    @GET
+    @Path("healthz")
+    public Response Alive() {
+        return Response.ok().build();
+    }
 
 }

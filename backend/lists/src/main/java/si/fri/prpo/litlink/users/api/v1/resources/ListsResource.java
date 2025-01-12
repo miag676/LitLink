@@ -42,7 +42,6 @@ public class ListsResource {
     public Response getAllLists() {
         return Response.ok(listsBean.getAllLists()).build();
     }
-
     @POST
     @Operation(summary = "Create a new list", description = "Creates a new list based on the provided details.")
     @APIResponses({
@@ -181,6 +180,20 @@ public class ListsResource {
         return Response.ok(books).build();
     }
 
+    @GET
+    @Path("readiness")
+    public Response Ready() {
+        boolean dbResponse = listsBean.checkDBConn();
+        if (dbResponse)
+            return Response.ok().build();
+        else
+            return Response.serverError().header("Error message", "DB is not responding").build();
+    }
 
+    @GET
+    @Path("healthz")
+    public Response Alive() {
+        return Response.ok().build();
+    }
 
 }

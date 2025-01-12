@@ -47,4 +47,20 @@ public class RecommendationResource {
         List<RecommendationDto> recommendations = recommendationBean.getRecommendationsForUser(userId);
         return Response.ok(recommendations).build();
     }
+
+    @GET
+    @Path("readiness")
+    public Response Ready() {
+        //boolean dbResponse = recommendationBean.checkDBConn();
+        //if (dbResponse)
+            return Response.ok().build();
+        //else
+        //    return Response.serverError().header("Error message", "DB is not responding").build();
+    }
+
+    @GET
+    @Path("healthz")
+    public Response Alive() {
+        return Response.ok().build();
+    }
 }

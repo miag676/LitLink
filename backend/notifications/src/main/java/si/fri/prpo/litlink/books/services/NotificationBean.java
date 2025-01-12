@@ -92,4 +92,15 @@ public class NotificationBean {
             throw new WebApplicationException("Unable to fetch user IDs", 500);
         }
     }
+
+    public boolean checkDBConn(){
+        try {
+            // Attempt a simple query to check the DB connection
+            em.createNativeQuery("SELECT 1").getSingleResult();
+            return true; // Return 200 if the database is reachable
+        } catch (Exception e) {
+            // If the query fails, return 500
+            return false;
+        }
+    }
 }

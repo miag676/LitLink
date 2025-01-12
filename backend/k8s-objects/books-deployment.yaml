@@ -19,6 +19,41 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "128Mi"
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
+        
+        startupProbe:
+          httpGet:
+            path: /v1/books/readiness       # Readiness check endpoint
+            port: 8080
+          initialDelaySeconds: 15  # Delay before first probe
+          periodSeconds: 10        # Check every 10 seconds
+          failureThreshold: 30     # After 30 failures, consider the pod as failed
+          successThreshold: 1      # 1 successful probe is enough to consider pod as started
+          timeoutSeconds: 5        # Timeout after 5 seconds
+
+        livenessProbe:
+          httpGet:
+            path: /v1/books/healthz         # Liveness check endpoint
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 15
+          failureThreshold: 5
+          timeoutSeconds: 3
+
+        readinessProbe:
+          httpGet:
+            path: /v1/books/readiness       # Readiness check endpoint
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
 
 ---
 apiVersion: v1

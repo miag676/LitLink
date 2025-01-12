@@ -143,4 +143,20 @@ public class UserResource {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid username or password").build();
         }
     }
+
+    @GET
+    @Path("readiness")
+    public Response Ready() {
+        boolean dbResponse = userBean.checkDBConn();
+        if (dbResponse)
+            return Response.ok().build();
+        else
+            return Response.serverError().header("Error message", "DB is not responding").build();
+    }
+
+    @GET
+    @Path("healthz")
+    public Response Alive() {
+        return Response.ok().build();
+    }
 }
