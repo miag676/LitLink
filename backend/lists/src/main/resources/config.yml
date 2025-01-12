@@ -9,4 +9,9 @@ kumuluzee:
     username: postgres
     password: postgres
     max-pool-size: 20
+  openapi-mp:
+    enabled: true
+    servlet:
+      mapping: /v1/lists/openapi
+
 
