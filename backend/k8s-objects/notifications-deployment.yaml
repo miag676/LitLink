@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifications
+  namespace: litlink
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notifications
+  template:
+    metadata:
+      labels:
+        app: notifications
+    spec:
+      containers:
+      - name: notifications-container
+        image: ghcr.io/spehic/notifications:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notifications-service
+  namespace: litlink
+spec:
+  type: LoadBalancer
+  selector:
+    app: notifications
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+

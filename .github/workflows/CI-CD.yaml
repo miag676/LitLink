@@ -1,0 +1,101 @@
+name: CI/CD for LitLink
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    # CI   
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build with Maven
+      run: mvn clean package --file backend/pom.xml
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to GitHub container registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: spehic
+        password: ${{ secrets.GIT_IMG_REG_TOKEN }}
+
+    - name: Build and push - users
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: ghcr.io/spehic/users:${{ github.sha }}
+        context: backend/users/
+
+    - name: Build and push - books
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: ghcr.io/spehic/books:${{ github.sha }}
+        context: backend/books/
+
+    - name: Build and push - lists
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: ghcr.io/spehic/lists:${{ github.sha }}
+        context: backend/lists/
+
+    - name: Build and push - ratings
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: ghcr.io/spehic/ratings:${{ github.sha }}
+        context: backend/ratings/
+
+    - name: Build and push - notifications
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: ghcr.io/spehic/notifications:${{ github.sha }}
+        context: backend/notifications/
+
+    - name: Build and push - recommendations
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: ghcr.io/spehic/recommendations:${{ github.sha }}
+        context: backend/recommendations/
+      
+    # CD
+    - uses: azure/k8s-set-context@v4
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+
+    - name: Deploy to AKS
+      uses: Azure/k8s-deploy@v4
+      with:
+        namespace: litlink
+        action: deploy
+        manifests: |
+          backend/k8s-objects/users-deployment.yaml
+          backend/k8s-objects/books-deployment.yaml
+          backend/k8s-objects/lists-deployment.yaml
+          backend/k8s-objects/ratings-deployment.yaml
+          backend/k8s-objects/notifications-deployment.yaml
+          backend/k8s-objects/recommendations-deployment.yaml
+        images: |
+          ghcr.io/spehic/users:${{ github.sha }}
+          ghcr.io/spehic/books:${{ github.sha }}
+          ghcr.io/spehic/lists:${{ github.sha }}
+          ghcr.io/spehic/ratings:${{ github.sha }}
+          ghcr.io/spehic/notifications:${{ github.sha }}
+          ghcr.io/spehic/recommendations:${{ github.sha }}
