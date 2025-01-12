@@ -31,7 +31,7 @@ spec:
           httpGet:
             path: /v1/books/readiness       # Readiness check endpoint
             port: 8080
-          initialDelaySeconds: 120  # Delay cbefore first probe
+          initialDelaySeconds: 60  # Delay before first probe
           periodSeconds: 10        # Check every 10 seconds
           failureThreshold: 30     # After 30 failures, consider the pod as failed
           successThreshold: 1      # 1 successful probe is enough to consider pod as started

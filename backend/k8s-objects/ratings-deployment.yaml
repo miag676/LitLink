@@ -27,6 +27,34 @@ spec:
             cpu: "100m"
             memory: "512Mi"
 
+        startupProbe:
+          httpGet:
+            path: /v1/ratings/readiness       # Readiness check endpoint
+            port: 8080
+          initialDelaySeconds: 60  # Delay before first probe
+          periodSeconds: 10        # Check every 10 seconds
+          failureThreshold: 30     # After 30 failures, consider the pod as failed
+          successThreshold: 1      # 1 successful probe is enough to consider pod as started
+          timeoutSeconds: 10        # Timeout after 5 seconds
+
+        livenessProbe:
+          httpGet:
+            path: /v1/ratings/healthz         # Liveness check endpoint
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 15
+          failureThreshold: 5
+          timeoutSeconds: 3
+
+        readinessProbe:
+          httpGet:
+            path: /v1/ratings/readiness       # Readiness check endpoint
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+
 ---
 apiVersion: v1
 kind: Service
