@@ -51,11 +51,11 @@ public class RecommendationResource {
     @GET
     @Path("readiness")
     public Response Ready() {
-        //boolean dbResponse = recommendationBean.checkDBConn();
-        //if (dbResponse)
+        String resMessage = recommendationBean.checkReady();
+        if (resMessage.equals("ok"))
             return Response.ok().build();
-        //else
-        //    return Response.serverError().header("Error message", "DB is not responding").build();
+        else
+           return Response.serverError().entity(resMessage).build();
     }
 
     @GET

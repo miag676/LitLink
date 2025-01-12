@@ -7,6 +7,8 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +19,9 @@ import java.util.HashMap;
 @ApplicationScoped
 public class RecommendationBean {
 
-    private final String listsServiceUrl = "http://localhost:9092/v1/lists";
-    private final String ratingsServiceUrl = "http://localhost:9091/v1/ratings";
-    private final String booksServiceUrl = "http://localhost:9090/v1/books";
+    private final String listsServiceUrl = "http://lists-service:8080/v1/lists";
+    private final String ratingsServiceUrl = "http://ratings-service:8080/v1/ratings";
+    private final String booksServiceUrl = "http://books-service:8080/v1/books";
 
     private final Client client = ClientBuilder.newClient();
 
@@ -123,16 +125,30 @@ public class RecommendationBean {
         }
     }
 
-    // public boolean checkDBConn(){
-    //     try {
-    //         // Attempt a simple query to check the DB connection
-    //         em.createNativeQuery("SELECT 1").getSingleResult();
-    //         return true; // Return 200 if the database is reachable
-    //     } catch (Exception e) {
-    //         // If the query fails, return 500
-    //         return false;
-    //     }
-    // }
+    public String checkReady(){
+        try {
+            Response resLists = client.target(listsServiceUrl + "/readiness").request().get();
+            if (resLists.getStatus() != 200)
+                return "Lists api is not ready";
+        } catch (Exception e) {
+            return "Lists api is not responding";
+        }
+        try{
+            Response resRatings = client.target(ratingsServiceUrl + "/readiness").request().get();
+            if (resRatings.getStatus() != 200)
+                return "Ratings api is not ready";
+        } catch (Exception e) {
+            return "Ratings api is not responding";
+        }
+        try{
+            Response resBooks= client.target(booksServiceUrl + "/readiness").request().get();
+            if (resBooks.getStatus() != 200)
+                return "Books api is not ready";
+        } catch (Exception e) {
+            return "Books api is not responding";
+        }
+        return "ok";
+    }
 }
 
 
