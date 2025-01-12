@@ -26,7 +26,7 @@ public class NotificationBean {
     private EntityManager em;
 
     private final Client client = ClientBuilder.newClient();
-    private final String usersServiceUrl = "http://localhost:8080/v1/users";
+    private final String usersServiceUrl = "http://users-service:8080/v1/users";
 
     @PostConstruct
     private void init() {
