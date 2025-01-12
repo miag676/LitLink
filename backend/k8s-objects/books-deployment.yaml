@@ -27,7 +27,7 @@ metadata:
   name: books-service
   namespace: litlink
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: books
   ports:

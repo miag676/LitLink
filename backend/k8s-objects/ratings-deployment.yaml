@@ -27,7 +27,7 @@ metadata:
   name: ratings-service
   namespace: litlink
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: ratings
   ports:

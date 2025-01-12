@@ -4,16 +4,9 @@
         <jta-data-source>jdbc/LitLinkDS</jta-data-source>
 
         <class>si.fri.prpo.litlink.recommendations.entities.Recommendation</class>
-	<!-- <class>si.fri.prpo.nakupovanje.entitete.Artikel</class>
-        <class>si.fri.prpo.nakupovanje.entitete.Uporabnik</class>
-        <class>si.fri.prpo.nakupovanje.entitete.Oznaka</class>
-
-		<class>si.fri.prpo.nakupovanje.pretvorniki.InstantPretvornik</class> -->
 
         <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
-        <!--    <property name="javax.persistence.sql-load-script-source" value="sql-scripts/init-db.sql"/> -->
             <property name="javax.persistence.schema-generation.drop-source" value="metadata"/>
         </properties>
 

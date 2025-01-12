@@ -27,7 +27,7 @@ metadata:
   name: lists-service
   namespace: litlink
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: lists
   ports:

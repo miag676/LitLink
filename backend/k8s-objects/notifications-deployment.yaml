@@ -27,7 +27,7 @@ metadata:
   name: notifications-service
   namespace: litlink
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: notifications
   ports:

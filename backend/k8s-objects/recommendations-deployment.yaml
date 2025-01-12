@@ -27,7 +27,7 @@ metadata:
   name: recommendations-service
   namespace: litlink
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: recommendations
   ports:

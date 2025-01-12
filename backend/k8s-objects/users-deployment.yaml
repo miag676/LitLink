@@ -27,7 +27,7 @@ metadata:
   name: users-service
   namespace: litlink
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: users
   ports:
