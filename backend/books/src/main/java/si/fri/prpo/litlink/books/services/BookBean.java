@@ -23,7 +23,7 @@ public class BookBean {
     @PostConstruct
     private void init() {
         log.info("Inicializacija zrna " + BookBean.class.getSimpleName());
-        System.out.println("User bean created");
+        System.out.println("Book bean created");
         // inicializacija virov
     }
 
